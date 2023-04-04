@@ -1,3 +1,6 @@
+const DataBaseError =require('../errors/DataBaseError');
+
+
 class Thing {
     static _tableName = 'things';
     static _client = null;
@@ -26,13 +29,15 @@ class Thing {
         return rows;
     }
     static async findByPk(pk) {
-        const { rows } = await this._client.query(`SELECT * FROM ${this._tableName}
-                                        WHERE id = ${pk};`);
-        return rows;
+        // const { rows } = await this._client.query(`SELECT * FROM ${this._tableName}
+        //                                 WHERE id = ${pk};`);
+        // return rows;
+        throw new DataBaseError();
     }
     static async findAll() {
-        const { rows } = await this._client.query(`SELECT * FROM ${this._tableName};`);
-        return rows;
+        // const { rows } = await this._client.query(`SELECT * FROM ${this._tableName};`);
+        // return rows;
+        throw new RangeError('Range Error');
     }
 
 
