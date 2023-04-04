@@ -32,3 +32,30 @@ module.exports.getOne = async (req, res, next) => {
         next(error);
     }
 }
+
+module.exports.updateOne = async (req, res, next) => {
+    const {params: {id}, body} = req;
+    try {
+        const updated = await Thing.updateByPk(
+            {
+                id: Number(id),
+                updateValues: body
+            }
+        );
+
+        return res.status(200).send(updated);
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+module.exports.deleteOne = async (req, res, next) => {
+    const {params: {id}} = req;
+    try {
+        const deleted = await Thing.deleteByPk(id);
+        return res.status(200).send(deleted);
+    } catch (error) {
+        next(error);
+    }
+}

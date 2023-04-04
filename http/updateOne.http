@@ -1,0 +1,6 @@
+PUT http://localhost:3000/thing/2 HTTP/1.1
+Content-Type: application/json
+
+{
+    "body": "New text TEST 123!!!! 20:01"
+}

@@ -34,6 +34,8 @@ class Thing {
         const { rows } = await this._client.query(`SELECT * FROM ${this._tableName};`);
         return rows;
     }
+
+
     static async updateByPk({id, updateValues}) {
         const insertAttr = Object.entries(this._attributes)
         .filter(([attr, domain]) => attr in updateValues)
@@ -41,8 +43,8 @@ class Thing {
 
         const insertValueStr = insertAttr.map(attr => {
             const value = updateValues[attr];
-            return typeof value === 'string' ? `'${value}'` : value;
-        }).join(',');
+            return typeof value === 'string' ? `${attr}='${value}'`: `${attr}=${value}`;
+        }).join(' ');
 
         const {rows} = await this._client.query(`UPDATE ${this._tableName}
                                 SET ${insertValueStr}
